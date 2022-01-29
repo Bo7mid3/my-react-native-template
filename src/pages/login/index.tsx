@@ -1,16 +1,15 @@
-import React, { Props, useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import React, { useState } from 'react'
+import { TouchableOpacity, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '@components/Background'
 import Logo from '@components/Logo'
 import Header from '@components/Header'
 import Button from '@components/Button'
 import TextInput from '@components/TextInput'
-import BackButton from '@components/BackButton'
-import { theme } from '@constants/theme'
 import { emailValidator } from '@utils/emailValidator'
 import { passwordValidator } from '@utils/passwordValidator'
 import { login } from '@services/authentification'
+import styles from "@styles";
 
 export default function Login({ navigation }: { navigation: any }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -43,7 +42,7 @@ export default function Login({ navigation }: { navigation: any }) {
         returnKeyType="next"
         value={email.value}
         onChangeText={(text: string) => setEmail({ value: text, error: '' })}
-        error={!!email.error}
+        error={email.error}
         errorText={email.error}
         autoCapitalize="none"
         autoCompleteType="email"
@@ -78,23 +77,3 @@ export default function Login({ navigation }: { navigation: any }) {
     </Background>
   )
 }
-
-const styles = StyleSheet.create({
-  forgotPassword: {
-    width: '100%',
-    alignItems: 'flex-end',
-    marginBottom: 24,
-  },
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  forgot: {
-    fontSize: 13,
-    color: theme.colors.text,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-})

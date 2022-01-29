@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '@components/Background'
 import Logo from '@components/Logo'
@@ -7,10 +7,10 @@ import Header from '@components/Header'
 import Button from '@components/Button'
 import TextInput from '@components/TextInput'
 import BackButton from '@components/BackButton'
-import { theme } from '@constants/theme'
 import { emailValidator } from '@utils/emailValidator'
 import { passwordValidator } from '@utils/passwordValidator'
 import { nameValidator } from '@utils/nameValidator'
+import styles from "@styles";
 
 export default function Register({ navigation }: { navigation: any }) {
     const [name, setName] = useState({ value: '', error: '' })
@@ -87,13 +87,3 @@ export default function Register({ navigation }: { navigation: any }) {
     )
 }
 
-const styles = StyleSheet.create({
-    row: {
-        flexDirection: 'row',
-        marginTop: 4,
-    },
-    link: {
-        fontWeight: 'bold',
-        color: theme.colors.primary,
-    },
-})

@@ -13,17 +13,24 @@ export async function login(email: string, password: string) {
     if (res && res.status != 200)
         throw Error("Something went wrong");
     const { token } = res.data;
-    console.log(token);
+    SecureStore.setItemAsync("jwt", token);
     await store.dispatch(connectUser({user: "test"}));
     await store.dispatch(setJwt(token));
     store.dispatch(setAuth());
     return;
 }
 
+export async function logout() {
+    await store.dispatch(disconnectUser());
+    await store.dispatch(unsetJwt());
+    store.dispatch(setUnauth());
+}
+
 export async function checkAuth() {
     let jwt = await SecureStore.getItemAsync("jwt");
+    console.log("here")
     if (jwt) {
-        await store.dispatch(connectUser(jwt_decode(jwt)));
+        await store.dispatch(connectUser({user: "test"}));
         await store.dispatch(setJwt(jwt));
         store.dispatch(setAuth());
     }

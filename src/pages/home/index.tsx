@@ -4,6 +4,7 @@ import Logo from '@components/Logo'
 import Header from '@components/Header'
 import Paragraph from '@components/Paragraph'
 import Button from '@components/Button'
+import { logout } from '@services/authentification'
 
 export default function Home({ navigation }: { navigation: any }) {
   return (
@@ -16,12 +17,7 @@ export default function Home({ navigation }: { navigation: any }) {
       </Paragraph>
       <Button
         mode="outlined"
-        onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'Login' }],
-          })
-        }
+        onPress={() => logout()}
       >
         Logout
       </Button>
