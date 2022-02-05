@@ -9,5 +9,6 @@ export const theme = {
     primary: '#00B386',
     error: '#f13a59',
     placeholder: '#ffffff',
+    secondary: "#6200ee"
   },
 }

@@ -14,6 +14,7 @@ import { HEADER_LESS_SCREEN } from "@constants/navigation";
 import Register from '@pages/register';
 import ResetPassword from '@pages/reset-password';
 import { connect, RootStateOrAny } from 'react-redux';
+import CreateRessource from '@pages/res-create';
 
 function Index({auth} : {auth: AuthVal}) {
     const setScreens = (): ReactElement[] => {
@@ -30,7 +31,8 @@ function Index({auth} : {auth: AuthVal}) {
                 ]
             case AuthVal.LoggedIn:
                 return [
-                    <Stack.Screen key={0} name="Home" component={Home} />
+                    <Stack.Screen key={0} name="Home" component={Home} options={{ ...HEADER_LESS_SCREEN }} />,
+                    <Stack.Screen key={1} name="CreateRessource" component={CreateRessource} options={{...HEADER_LESS_SCREEN}} />
                 ]
         }
     }

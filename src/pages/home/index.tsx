@@ -16,6 +16,9 @@ export default function Home({ navigation }: { navigation: any }) {
         editing this project.
       </Paragraph>
       <Button
+        onPress={() => navigation.navigate("CreateRessource")}
+      >Create ressource</Button>
+      <Button
         mode="outlined"
         onPress={() => logout()}
       >
