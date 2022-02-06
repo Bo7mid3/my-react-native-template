@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import { Text } from 'react-native-paper'
 import { theme } from '@constants/theme'
 
-export default function Header(props) {
+export default function Header(props: any) {
   return <Text style={styles.header} {...props} />
 }
 

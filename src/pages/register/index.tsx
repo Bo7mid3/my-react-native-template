@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { View, TouchableOpacity } from 'react-native'
-import { Text } from 'react-native-paper'
+import { View, TouchableOpacity, Text } from 'react-native'
 import Background from '@components/Background'
 import Logo from '@components/Logo'
 import Header from '@components/Header'

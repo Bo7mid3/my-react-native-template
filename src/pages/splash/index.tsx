@@ -1,11 +1,11 @@
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import React from "react";
 import Background from "@components/Background";
-import { ActivityIndicator } from "react-native-paper";
 
-export default function index() {
+export default function Splash() {
   return (
     <Background>
+      {/* @ts-ignore */}
       <ActivityIndicator />
     </Background>
   );

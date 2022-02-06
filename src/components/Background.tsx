@@ -2,7 +2,7 @@ import React from 'react'
 import { ImageBackground, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import { theme } from '@constants/theme'
 
-export default function Background({ children }) {
+export default function Background({ children }: {children?: JSX.Element[]}) {
   return (
     <ImageBackground
       source={require('../assets/background_dot.png')}

@@ -6,6 +6,7 @@ import { theme } from "@constants/theme";
 export default function TextInput({
   errorText,
   description,
+  label,
   ...props
 }: {
   errorText?: string;
