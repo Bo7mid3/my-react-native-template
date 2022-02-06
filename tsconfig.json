@@ -4,32 +4,16 @@
     "strict": true,
     "baseUrl": "./src",
     "paths": {
-      "@styles": [
-        "./styles",
-        "./styles/*"
-      ],
-      "@pages/*": [
-        "./pages/*"
-      ],
-      "@constants/*": [
-        "./constants/*"
-      ],
-      "@store": [
-        "./store",
-        "./store/*"
-      ],
-      "@services": [
-        "./services/*"
-      ],
-      "@components": [
-        "./components/*"
-      ],
-      "@utils": [
-        "./utils/*"
-      ],
-      "@assets": [
-        "./assets/*"
-      ]
+      "@styles/*": ["./styles/*"],
+      "@styles": ["./styles"],
+      "@pages/*": ["./pages/*"],
+      "@constants/*": ["./constants/*"],
+      "@components/*": ["./components/*"],
+      "@store/*": ["./store/*"],
+      "@store": ["./store"],
+      "@services/*": ["./services/*"],
+      "@utils/*": ["./utils/*"],
+      "@assets/*": ["./assets/*"]
     }
   }
 }

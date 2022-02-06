@@ -1,10 +1,12 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { View, Text } from "react-native";
+import React from "react";
+import Background from "@components/Background";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function index() {
   return (
-    <View>
-      <Text>Splash</Text>
-    </View>
+    <Background>
+      <ActivityIndicator />
+    </Background>
   );
 }

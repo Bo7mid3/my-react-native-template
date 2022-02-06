@@ -3,7 +3,20 @@ import { StyleSheet, View, Text } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { theme } from "@constants/theme";
 
-export default function Picker({errorText, description, placeholder, value ,...props}) {
+export default function Picker({
+  errorText,
+  description,
+  placeholder,
+  value,
+  ...props
+}: {
+  errorText?: string;
+  description?: string;
+  value?: any;
+  placeholder?: string;
+  onSelectItem?: { (item: { label: string; value: any }): void };
+  items: { label: string; value: any }[],
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -13,6 +26,7 @@ export default function Picker({errorText, description, placeholder, value ,...p
           Item
         </Text>
       )}
+      { /* @ts-ignore */}
       <DropDownPicker
         open={open}
         value={value}
@@ -25,7 +39,7 @@ export default function Picker({errorText, description, placeholder, value ,...p
         placeholder={open ? "" : placeholder}
         textStyle={[styles.text]}
         props={{
-          activeOpacity: 1
+          activeOpacity: 1,
         }}
         placeholderStyle={[styles.placeholder]}
       />
@@ -41,7 +55,7 @@ const styles = StyleSheet.create({
   parentContainer: {
     position: "relative",
     width: "100%",
-    zIndex: 10000
+    zIndex: 10000,
   },
   header: {
     color: "#111",
@@ -57,12 +71,13 @@ const styles = StyleSheet.create({
     height: 50,
     marginVertical: 12,
     backgroundColor: theme.colors.surface,
-    borderColor: "#000",
+    borderColor: "#111",
     borderWidth: 1,
     borderRadius: 3,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingLeft: 14,
   },
   pickerOpened: {
     borderColor: theme.colors.primary,
@@ -82,5 +97,7 @@ const styles = StyleSheet.create({
     paddingTop: 8,
   },
   placeholder: {
-  }
+    color: "#111",
+  },
+  description: {},
 });
