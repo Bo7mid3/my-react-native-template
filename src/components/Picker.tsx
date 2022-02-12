@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Animated } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { theme } from "@constants/theme";
 
@@ -19,12 +19,13 @@ export default function Picker({
 }) {
   const [open, setOpen] = useState(false);
 
+
   return (
     <View style={[styles.parentContainer]}>
       {(open || value) && (
-        <Text style={[styles.header, open && { color: theme.colors.primary }]}>
+        <Animated.Text style={[styles.header, open && { color: theme.colors.primary }]}>
           Item
-        </Text>
+        </Animated.Text>
       )}
       { /* @ts-ignore */}
       <DropDownPicker
