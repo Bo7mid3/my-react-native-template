@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, Text, Animated } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { theme } from "@constants/theme";
@@ -7,27 +7,55 @@ export default function Picker({
   errorText,
   description,
   placeholder,
+  label,
   value,
   ...props
 }: {
   errorText?: string;
   description?: string;
   value?: any;
+  label?: string;
   placeholder?: string;
   onSelectItem?: { (item: { label: string; value: any }): void };
-  items: { label: string; value: any }[],
+  items: { label: string; value: any }[];
 }) {
   const [open, setOpen] = useState(false);
+  const floatLabelAnim = useRef(new Animated.Value(0)).current;
 
+  useEffect(() => {
+    Animated.timing(floatLabelAnim, {
+      toValue: (open || value != null) ? 1 : 0,
+      duration: 200,
+      useNativeDriver: true
+    }).start();
+  }, [open]);
+
+  const labelStyle = {
+    position: "absolute",
+    top: floatLabelAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["50%", "0%"],
+    }),
+    color: "#111",
+    fontSize: floatLabelAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: [18, 14],
+    }),
+    left: "3%",
+    backgroundColor: theme.colors.surface,
+    paddingHorizontal: "1.5%",
+    transform: [{ translateY: (open || value != null) ? 0 : "-50%" }],
+    zIndex: 10000
+  };
 
   return (
     <View style={[styles.parentContainer]}>
-      {(open || value) && (
-        <Animated.Text style={[styles.header, open && { color: theme.colors.primary }]}>
-          Item
-        </Animated.Text>
-      )}
-      { /* @ts-ignore */}
+      <Animated.Text
+        style={[labelStyle, open && { color: theme.colors.primary }]}
+      >
+        Item
+      </Animated.Text>
+      {/* @ts-ignore */}
       <DropDownPicker
         open={open}
         value={value}
@@ -37,7 +65,7 @@ export default function Picker({
         itemProps={{
           style: styles.item,
         }}
-        placeholder={open ? "" : placeholder}
+        placeholder={""}
         textStyle={[styles.text]}
         props={{
           activeOpacity: 1,
