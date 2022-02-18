@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { StyleSheet, View, Text, Animated } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { theme } from "@constants/theme";
+import { useCallback } from "react";
 
 export default function Picker({
   errorText,
@@ -48,8 +49,15 @@ export default function Picker({
     zIndex: 10000,
   };
 
+  const parentHeightOnOpen = useMemo(() => {
+    const res = 50+60*props.items.length;
+    if (res > 235)
+      return 235;
+    return res;
+  }, [props.items]);
+
   return (
-    <View style={[styles.parentContainer]}>
+    <View style={[styles.parentContainer, open && { height: parentHeightOnOpen } ]}>
       <Animated.Text
         /* @ts-ignore */
         style={[labelStyle, open && { color: theme.colors.primary }]}
@@ -71,8 +79,9 @@ export default function Picker({
           activeOpacity: 1,
         }}
         dropDownContainerStyle={{
-          zIndex: 5000,
+          
         }}
+        maxHeight={180}
         placeholder=""
       />
       {description && !errorText ? (
@@ -110,12 +119,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 14,
-    zIndex: 5000,
   },
   pickerOpened: {
     borderColor: theme.colors.primary,
     borderWidth: 2,
-    zIndex: 5000,
   },
   text: {
     fontSize: 16,
@@ -124,7 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     padding: 20,
     flexDirection: "row",
-    zIndex: 5000,
+    height: 60
   },
   error: {
     fontSize: 13,

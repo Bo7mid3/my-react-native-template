@@ -26,8 +26,6 @@ export default function CreateRessource({
     },
   });
   const onSubmit = (data: any) => console.log(data);
-  const [pickerA, setPickerA] = useState({ value: null, error: "" });
-  const [fieldA, setFieldA] = useState({ value: "", error: "" });
   return (
     <Background>
       <Icon name={"plus-square"} solid size={80} color={theme.colors.primary} />
@@ -40,8 +38,7 @@ export default function CreateRessource({
           <Picker
             value={value}
             onSelectItem={
-              (item: { label: string; value: any }) => { console.log("here");onChange(item.value)}
-              /* setPickerA({ value: item.value, error: "" }) */
+              (item: { label: string; value: any }) => onChange(item.value)
             }
             items={[
               { label: "Apple", value: "apple" },
@@ -59,9 +56,6 @@ export default function CreateRessource({
         name="fieldA"
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            /* onChangeText={(text: string) => {
-              setFieldA({ value: text, error: "" });
-            }} */
             onChangeText={onChange}
             value={value}
             onBlur={onBlur}
