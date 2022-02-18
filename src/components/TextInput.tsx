@@ -11,7 +11,7 @@ export default function TextInput({
   errorText?: string;
   description?: string;
   value: string;
-  onChangeText: { (arg0: string): void };
+  onChangeText?: { (arg0: string): void };
   label: string;
   returnKeyType?: string;
   error?: string | boolean;
@@ -19,7 +19,9 @@ export default function TextInput({
   autoCompleteType?: string;
   textContentType?: string;
   keyboardType?: string;
-  secureTextEntry?: boolean
+  secureTextEntry?: boolean;
+  onChange?: Function;
+  onBlur?: Function
 }) {
   return (
     <View style={styles.container}>

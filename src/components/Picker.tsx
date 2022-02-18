@@ -24,9 +24,9 @@ export default function Picker({
 
   useEffect(() => {
     Animated.timing(floatLabelAnim, {
-      toValue: (open || value != null) ? 1 : 0,
+      toValue: open || value != null ? 1 : 0,
       duration: 200,
-      useNativeDriver: true
+      useNativeDriver: false,
     }).start();
   }, [open]);
 
@@ -44,13 +44,14 @@ export default function Picker({
     left: "3%",
     backgroundColor: theme.colors.surface,
     paddingHorizontal: "1.5%",
-    transform: [{ translateY: (open || value != null) ? 0 : "-50%" }],
-    zIndex: 10000
+    transform: [{ translateY: open || value != null ? 0 : -12 }],
+    zIndex: 10000,
   };
 
   return (
     <View style={[styles.parentContainer]}>
       <Animated.Text
+        /* @ts-ignore */
         style={[labelStyle, open && { color: theme.colors.primary }]}
       >
         Item
@@ -65,12 +66,14 @@ export default function Picker({
         itemProps={{
           style: styles.item,
         }}
-        placeholder={""}
         textStyle={[styles.text]}
         props={{
           activeOpacity: 1,
         }}
-        placeholderStyle={[styles.placeholder]}
+        dropDownContainerStyle={{
+          zIndex: 5000,
+        }}
+        placeholder=""
       />
       {description && !errorText ? (
         <Text style={styles.description}>{description}</Text>
@@ -107,10 +110,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 14,
+    zIndex: 5000,
   },
   pickerOpened: {
     borderColor: theme.colors.primary,
     borderWidth: 2,
+    zIndex: 5000,
   },
   text: {
     fontSize: 16,
@@ -119,6 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     padding: 20,
     flexDirection: "row",
+    zIndex: 5000,
   },
   error: {
     fontSize: 13,

@@ -9,11 +9,23 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { theme } from "@constants/theme";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@constants/params";
+import { useForm, Controller } from "react-hook-form";
 
 export default function CreateRessource({
   route,
   navigation,
 }: NativeStackScreenProps<RootStackParamList, "CreateRessource">) {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      fieldA: "",
+      pickerA: null,
+    },
+  });
+  const onSubmit = (data: any) => console.log(data);
   const [pickerA, setPickerA] = useState({ value: null, error: "" });
   const [fieldA, setFieldA] = useState({ value: "", error: "" });
   return (
@@ -21,25 +33,46 @@ export default function CreateRessource({
       <Icon name={"plus-square"} solid size={80} color={theme.colors.primary} />
       <BackButton goBack={navigation.goBack} />
       <Header>Create Ressource</Header>
-      <Picker
-        value={pickerA.value}
-        onSelectItem={(item: { label: string; value: any }) =>
-          setPickerA({ value: item.value, error: "" })
-        }
-        items={[
-          { label: "Apple", value: "apple" },
-          { label: "Banana", value: "banana" },
-        ]}
-        placeholder="Select an item"
+      <Controller
+        control={control}
+        name="pickerA"
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Picker
+            value={value}
+            onSelectItem={
+              (item: { label: string; value: any }) => { console.log("here");onChange(item.value)}
+              /* setPickerA({ value: item.value, error: "" }) */
+            }
+            items={[
+              { label: "Apple", value: "apple" },
+              { label: "Banana", value: "banana" },
+            ]}
+          />
+        )}
       />
-      <TextInput
-        value={fieldA.value}
-        onChangeText={(text: string) => {
-          setFieldA({ value: text, error: "" });
+      <Controller
+        /* @ts-ignore */
+        control={control}
+        rules={{
+          required: true,
         }}
-        label="Field A"
+        name="fieldA"
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            /* onChangeText={(text: string) => {
+              setFieldA({ value: text, error: "" });
+            }} */
+            onChangeText={onChange}
+            value={value}
+            onBlur={onBlur}
+            label="Field A"
+          />
+        )}
       />
-      <Button mode="contained">Submit</Button>
+
+      <Button mode="contained" onPress={handleSubmit(onSubmit)}>
+        Submit
+      </Button>
     </Background>
   );
 }
